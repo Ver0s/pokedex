@@ -22,7 +22,20 @@ export async function addToFavorites(name: string) {
 	}
 }
 
-export async function getData(key: 'FAVORITE_POKEMON') {
+export async function removeFromFavorites(name: string) {
+	const pokemonArray: favoritePokemonArray = await getData(FAVORITE_POKEMON);
+	if (pokemonArray.length === 0 || pokemonArray === null) return;
+
+	try {
+		const removed = pokemonArray.filter(
+			(pokemonName) => pokemonName !== name
+		);
+
+		await AsyncStorage.setItem(FAVORITE_POKEMON, JSON.stringify(removed));
+	} catch (e) {
+		throw e;
+	}
+}
 	try {
 		const jsonValue = await AsyncStorage.getItem(key);
 
