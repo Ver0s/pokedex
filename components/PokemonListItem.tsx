@@ -29,10 +29,7 @@ type PokemonListItemProps = {
 					source={{ uri: data?.sprites.other.home.front_default }}
 					style={styles.image}
 				/>
-
-				<Text style={styles.pokemonName}>{data?.name}</Text>
-			</View>
-		</TouchableOpacity>
+				{capitaLizeFirstLetter(data?.name)}
 	);
 }
 
