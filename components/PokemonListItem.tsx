@@ -1,12 +1,22 @@
+import { memo } from 'react';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Image,
 	Pressable,
+	ActivityIndicator,
+} from 'react-native';
 import useFetch from '../hooks/useFetch';
 import { useNavigation } from '@react-navigation/native';
-import type { PokemonResult, PokemonData } from './components.types';
+import type { PokemonData } from './components.types';
+import { capitaLizeFirstLetter } from '../utils/textUtils';
 
 type PokemonListItemProps = {
-	pokemonInfo: PokemonResult;
+	pokemonName: string;
 };
 
+export default memo(function PokemonListItem({
 	pokemonName,
 }: PokemonListItemProps) {
 	const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
