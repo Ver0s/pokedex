@@ -42,7 +42,7 @@ export default function PokemonList() {
 				<FlatList
 					data={pokemonList}
 					renderItem={({ item }) => (
-						<PokemonListItem pokemonInfo={item} />
+						<PokemonListItem pokemonName={item.name} />
 					)}
 					keyExtractor={(item) => item.name}
 					onEndReachedThreshold={0.05}
@@ -58,7 +58,5 @@ export default function PokemonList() {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-	},
+	container: {},
 });

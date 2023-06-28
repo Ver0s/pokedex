@@ -7,8 +7,11 @@ type PokemonListItemProps = {
 	pokemonInfo: PokemonResult;
 };
 
-export default function PokemonListItem({ pokemonInfo }: PokemonListItemProps) {
-	const { data, isLoading, error } = useFetch<PokemonData>(pokemonInfo.url);
+	pokemonName,
+}: PokemonListItemProps) {
+	const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+
+	const { data, isLoading, error } = useFetch<PokemonData>(url);
 	const navigation = useNavigation();
 
 	if (error) return <p>There is an error: {error}</p>;
