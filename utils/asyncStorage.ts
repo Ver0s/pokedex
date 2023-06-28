@@ -5,7 +5,7 @@ type favoritePokemonArray = string[];
 const FAVORITE_POKEMON = 'FAVORITE_POKEMON';
 
 export async function addToFavorites(name: string) {
-	if (await isPokemonInStorage(name)) return;
+	if (await isPokemonFavorite(name)) return;
 
 	try {
 		const pokemonArray: favoritePokemonArray =
@@ -54,7 +54,7 @@ export async function clearStorage() {
 	console.log('Async storage cleared');
 }
 
-async function isPokemonInStorage(name: string) {
+export async function isPokemonFavorite(name: string) {
 	const pokemonArray: favoritePokemonArray = await getData(FAVORITE_POKEMON);
 	if (!pokemonArray) return false;
 
