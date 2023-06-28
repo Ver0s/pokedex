@@ -1,8 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type favoritePokemonArray = string[];
-
 const FAVORITE_POKEMON = 'FAVORITE_POKEMON';
+type allowedKeys = typeof FAVORITE_POKEMON;
+type favoritePokemonArray = string[];
 
 export async function addToFavorites(name: string) {
 	if (await isPokemonFavorite(name)) return;
@@ -36,6 +36,7 @@ export async function removeFromFavorites(name: string) {
 		throw e;
 	}
 }
+
 export async function getData(key: allowedKeys) {
 	try {
 		const jsonValue = await AsyncStorage.getItem(key);
