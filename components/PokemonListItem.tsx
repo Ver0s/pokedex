@@ -24,11 +24,17 @@ type PokemonListItemProps = {
 				})
 			}
 		>
-			<View style={styles.container}>
+			{isLoading ? (
+				<ActivityIndicator
+					size="small"
+					style={{ width: '100%', height: '80%' }}
+				/>
+			) : (
 				<Image
 					source={{ uri: data?.sprites.other.home.front_default }}
 					style={styles.image}
 				/>
+			)}
 				{capitaLizeFirstLetter(data?.name)}
 		</Pressable>
 	);
