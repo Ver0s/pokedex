@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+	Pressable,
 import useFetch from '../hooks/useFetch';
 import { useNavigation } from '@react-navigation/native';
 import type { PokemonResult, PokemonData } from './components.types';
@@ -17,7 +17,7 @@ type PokemonListItemProps = {
 	if (error) return <p>There is an error: {error}</p>;
 
 	return (
-		<TouchableOpacity
+		<Pressable
 			onPress={() =>
 				navigation.navigate('PokemonDetails', {
 					pokemonData: data,
@@ -30,6 +30,7 @@ type PokemonListItemProps = {
 					style={styles.image}
 				/>
 				{capitaLizeFirstLetter(data?.name)}
+		</Pressable>
 	);
 }
 
