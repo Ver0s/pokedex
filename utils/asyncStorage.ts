@@ -36,6 +36,7 @@ export async function removeFromFavorites(name: string) {
 		throw e;
 	}
 }
+export async function getData(key: allowedKeys) {
 	try {
 		const jsonValue = await AsyncStorage.getItem(key);
 
