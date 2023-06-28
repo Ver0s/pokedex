@@ -50,6 +50,7 @@ export default function PokemonList() {
 					ListFooterComponent={
 						isLoading ? <ActivityIndicator size="small" /> : null
 					}
+					numColumns={3}
 				/>
 			)}
 		</View>
