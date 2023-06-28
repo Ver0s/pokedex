@@ -1,34 +1,48 @@
 import { Text, Image, View, StyleSheet, Button } from 'react-native';
-import { addToFavorites, getData, clearStorage } from '../utils/asyncStorage';
+import { addToFavorites, removeFromFavorites } from '../utils/asyncStorage';
+import { isPokemonFavorite } from '../utils/asyncStorage';
+import { useEffect, useState } from 'react';
+import { capitaLizeFirstLetter } from '../utils/textUtils';
 
-export default function PokemonDetails({ route }) {
+export default function PokemonDetails({ route, navigation }) {
+	const [isFavorite, setIsFavorite] = useState(false);
 	const { pokemonData } = route.params;
+
+	useEffect(() => {
+		navigation.setOptions({
+			title: capitaLizeFirstLetter(pokemonData.name),
+		});
+
+		async function checkFavorite() {
+			const bool = await isPokemonFavorite(pokemonData.name);
+
+			setIsFavorite(bool);
+		}
+
+		checkFavorite();
+	}, []);
+
+	async function handleFavoritePress() {
+		setIsFavorite(!isFavorite);
+
+		if (isFavorite) {
+			await removeFromFavorites(pokemonData.name);
+		} else {
+			await addToFavorites(pokemonData.name);
+		}
+	}
 
 	return (
 		<View style={styles.container}>
-			<Text>{pokemonData.name}</Text>
 			<Image
 				source={{ uri: pokemonData?.sprites.other.home.front_default }}
 				style={styles.image}
 			/>
 			<Button
-				title="Add To Favorites"
-				onPress={async () => {
-					addToFavorites(pokemonData.name);
-				}}
-			/>
-			<Button
-				title="Log storage"
-				onPress={async () => {
-					const storage = await getData('FAVORITE_POKEMON');
-					console.log(storage);
-				}}
-			/>
-			<Button
-				title="Clear storage"
-				onPress={async () => {
-					clearStorage();
-				}}
+				title={
+					isFavorite ? 'Remove from favorites' : 'Add to favorites'
+				}
+				onPress={handleFavoritePress}
 			/>
 		</View>
 	);
@@ -37,9 +51,14 @@ export default function PokemonDetails({ route }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		alignItems: 'center',
 	},
 	image: {
 		width: 200,
 		height: 200,
+	},
+	pokemonName: {
+		fontSize: 20,
+		fontWeight: 'bold',
 	},
 });
