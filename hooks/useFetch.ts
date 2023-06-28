@@ -11,6 +11,8 @@ export default function useFetch<T>(url: string) {
 	const [error, setError] = useState<string>('');
 
 	async function fetchData() {
+		if (!url) return;
+
 		setIsLoading(true);
 		try {
 			const response = await fetch(url);
