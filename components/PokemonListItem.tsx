@@ -23,6 +23,7 @@ type PokemonListItemProps = {
 					pokemonData: data,
 				})
 			}
+			style={styles.card}
 		>
 			{isLoading ? (
 				<ActivityIndicator
@@ -35,23 +36,30 @@ type PokemonListItemProps = {
 					style={styles.image}
 				/>
 			)}
+			<Text style={styles.pokemonName} numberOfLines={1}>
 				{capitaLizeFirstLetter(data?.name)}
+			</Text>
 		</Pressable>
 	);
-}
+});
 
 const styles = StyleSheet.create({
-	container: {
-		display: 'flex',
-		flexDirection: 'row',
+	card: {
+		flex: 1,
 		alignItems: 'center',
-		borderWidth: 1,
-		borderColor: 'black',
-		padding: 1,
-	},
-	image: {
+		flexBasis: 100,
+		flexGrow: 0,
 		width: 100,
 		height: 100,
+		backgroundColor: '#e2e8f0',
+		padding: 10,
+		borderRadius: 12,
+		margin: 10,
+	},
+	image: {
+		width: '100%',
+		height: '80%',
+		resizeMode: 'contain',
 	},
 	pokemonName: {
 		fontWeight: 'bold',
