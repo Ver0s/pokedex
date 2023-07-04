@@ -14,14 +14,20 @@ type FoundPokemon = {
 	notes: string;
 };
 
+const initialFoundPokemonData: FoundPokemon = {
+	name: '',
+	notes: '',
+};
+
 export default function AddPinModal({
 	isVisible,
 	title,
 	onClose,
 	onAddPin,
 }: AddPinModalProps) {
-	const [foundPokemonData, setFoundPokemonData] =
-		useState<FoundPokemon | null>(null);
+	const [foundPokemonData, setFoundPokemonData] = useState<FoundPokemon>(
+		initialFoundPokemonData
+	);
 
 	return (
 		<MapModal isVisible={isVisible} title={title} onClose={onClose}>
