@@ -32,3 +32,13 @@ export type PokemonResult = {
 	name: string;
 	url: string;
 };
+
+export type MapPin = {
+	id: string;
+	name: string;
+	notes: string;
+	coords: {
+		latitude: number;
+		longitude: number;
+	};
+};
