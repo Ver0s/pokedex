@@ -68,10 +68,12 @@ export default function AddPinModal({
 				<Button
 					title="Add Pin"
 					onPress={() => {
-						onAddPin(
-							foundPokemonData?.name,
-							foundPokemonData?.notes
-						);
+						if (foundPokemonData.name.trim() === '') {
+							alert('Please enter a name');
+							return;
+						}
+						onAddPin(foundPokemonData.name, foundPokemonData.notes);
+						setFoundPokemonData(initialFoundPokemonData);
 					}}
 				/>
 			</View>
