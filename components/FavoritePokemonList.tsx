@@ -10,25 +10,6 @@ import { getData } from '../utils/asyncStorage';
 import { useIsFocused } from '@react-navigation/native';
 import PokemonListItem from './PokemonListItem';
 
-// async function getPokemonDataByNames(names: string[]) {
-// 	try {
-// 		const fetchedData: PokemonData[] = [];
-// 		for (const name of names) {
-// 			const response = await fetch(
-// 				`https://pokeapi.co/api/v2/pokemon/${name}`
-// 			);
-// 			if (!response.ok) return;
-
-// 			const json: PokemonData = await response.json();
-
-// 			fetchedData.push(json);
-// 		}
-// 		return fetchedData;
-// 	} catch (e) {
-// 		throw e;
-// 	}
-// }
-
 export default function FavoritePokemonList() {
 	const [favoritePokemonNames, setFavoritePokemonNames] = useState<string[]>(
 		[]
