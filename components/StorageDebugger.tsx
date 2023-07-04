@@ -1,4 +1,4 @@
-import { Button, Text, View } from 'react-native';
+import { Button, View } from 'react-native';
 import { getData, clearStorage } from '../utils/asyncStorage';
 
 export default function StorageDebugger() {
