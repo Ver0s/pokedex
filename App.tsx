@@ -5,7 +5,8 @@ import PokemonList from './components/PokemonList';
 import PokemonDetails from './components/PokemonDetails';
 import FavoritePokemonList from './components/FavoritePokemonList';
 import PokemonMap from './components/PokemonMap';
-import { Text } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import 'react-native-get-random-values';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -13,9 +14,42 @@ const Stack = createStackNavigator();
 function HomeScreen() {
 	return (
 		<Tab.Navigator>
-			<Tab.Screen name="Pokédex" component={PokemonList} />
-			<Tab.Screen name="Favorites" component={FavoritePokemonList} />
-			<Tab.Screen name="Map" component={PokemonMap} />
+			<Tab.Screen
+				name="Pokédex"
+				component={PokemonList}
+				options={{
+					tabBarIcon: ({ focused }) =>
+						focused ? (
+							<Ionicons name="list" size={24} />
+						) : (
+							<Ionicons name="list-outline" size={24} />
+						),
+				}}
+			/>
+			<Tab.Screen
+				name="Favorites"
+				component={FavoritePokemonList}
+				options={{
+					tabBarIcon: ({ focused }) =>
+						focused ? (
+							<Ionicons name="bookmark" size={24} />
+						) : (
+							<Ionicons name="bookmark-outline" size={24} />
+						),
+				}}
+			/>
+			<Tab.Screen
+				name="Map"
+				component={PokemonMap}
+				options={{
+					tabBarIcon: ({ focused }) =>
+						focused ? (
+							<Ionicons name="map" size={24} />
+						) : (
+							<Ionicons name="map-outline" size={24} />
+						),
+				}}
+			/>
 		</Tab.Navigator>
 	);
 }
