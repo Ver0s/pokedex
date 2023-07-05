@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
 		margin: 10,
 	},
 	favorite: {
-		backgroundColor: '#FCD34D',
+		borderWidth: 3,
+		borderColor: '#FCD34D',
 	},
 	image: {
 		width: '100%',
