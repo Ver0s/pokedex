@@ -16,21 +16,32 @@ export default function MapModal({
 	title,
 }: MapModalProps) {
 	return (
-		<Modal animationType="slide" transparent={true} visible={isVisible}>
-			<View style={styles.modalContent}>
-				<View style={styles.titleContainer}>
-					<Text style={styles.title}>{title}</Text>
-					<Pressable onPress={onClose}>
-						<Ionicons name="close-outline" size={22} />
-					</Pressable>
+		<Modal
+			animationType="slide"
+			transparent={true}
+			visible={isVisible}
+			onRequestClose={onClose}
+		>
+			<Pressable
+				style={styles.overlay}
+				onPress={(e) => e.target === e.currentTarget && onClose()}
+			>
+				<View style={styles.modalContent}>
+					<View style={styles.titleContainer}>
+						<Text style={styles.title}>{title}</Text>
+						<Pressable onPress={onClose}>
+							<Ionicons name="close-outline" size={22} />
+						</Pressable>
+					</View>
+					{children}
 				</View>
-				{children}
-			</View>
+			</Pressable>
 		</Modal>
 	);
 }
 
 const styles = StyleSheet.create({
+	overlay: { position: 'absolute', left: 0, right: 0, bottom: 0, top: 0 },
 	modalContent: {
 		width: '100%',
 		backgroundColor: '#fff',
