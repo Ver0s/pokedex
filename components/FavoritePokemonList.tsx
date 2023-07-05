@@ -4,6 +4,7 @@ import {
 	FlatList,
 	ActivityIndicator,
 	StyleSheet,
+	Button,
 } from 'react-native';
 import { useState, useEffect } from 'react';
 import { getData } from '../utils/asyncStorage';
@@ -34,9 +35,11 @@ export default function FavoritePokemonList() {
 	if (isLoading) return <ActivityIndicator size="large" />;
 
 	return (
-		<View style={styles.container}>
+		<View>
 			{favoritePokemonNames.length === 0 ? (
-				<Text>You have no favorite pokemons</Text>
+				<Text style={styles.noFavoritesText}>
+					You have no favorite pokemons.
+				</Text>
 			) : (
 				<FlatList
 					data={favoritePokemonNames}
@@ -55,5 +58,8 @@ export default function FavoritePokemonList() {
 }
 
 const styles = StyleSheet.create({
-	container: {},
+	noFavoritesText: {
+		textAlign: 'center',
+		marginTop: 30,
+	},
 });
