@@ -41,7 +41,10 @@ export default function FavoritePokemonList() {
 				<FlatList
 					data={favoritePokemonNames}
 					renderItem={({ item }) => (
-						<PokemonListItem pokemonName={item} />
+						<PokemonListItem
+							pokemonName={item}
+							highlightFavorite={false}
+						/>
 					)}
 					keyExtractor={(item) => item}
 					numColumns={3}

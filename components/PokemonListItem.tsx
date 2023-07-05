@@ -1,8 +1,8 @@
-import { memo } from 'react';
+import { memo, useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
 	StyleSheet,
 	Text,
-	View,
 	Image,
 	Pressable,
 	ActivityIndicator,
@@ -11,20 +11,37 @@ import useFetch from '../hooks/useFetch';
 import { useNavigation } from '@react-navigation/native';
 import type { PokemonData } from './components.types';
 import { capitaLizeFirstLetter } from '../utils/textUtils';
+import { isPokemonFavorite } from '../utils/asyncStorage';
 
 type PokemonListItemProps = {
 	pokemonName: string;
+	highlightFavorite: boolean;
 };
 
 export default memo(function PokemonListItem({
 	pokemonName,
+	highlightFavorite,
 }: PokemonListItemProps) {
 	const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
 	const { data, isLoading, error } = useFetch<PokemonData>(url);
+	const [isFavorite, setIsFavorite] = useState(false);
 	const navigation = useNavigation();
 
-	if (error) return <p>There is an error: {error}</p>;
+	useFocusEffect(
+		useCallback(() => {
+			async function checkFavorite() {
+				const isFav = await isPokemonFavorite(pokemonName);
+				setIsFavorite(isFav);
+			}
+
+			if (highlightFavorite) {
+				checkFavorite();
+			}
+		}, [pokemonName, highlightFavorite])
+	);
+
+	if (error) return <p>Error: {error}</p>;
 
 	return (
 		<Pressable
@@ -33,7 +50,7 @@ export default memo(function PokemonListItem({
 					pokemonData: data,
 				})
 			}
-			style={styles.card}
+			style={[styles.card, isFavorite && styles.favorite]}
 		>
 			{isLoading ? (
 				<ActivityIndicator
@@ -65,6 +82,9 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 12,
 		margin: 10,
+	},
+	favorite: {
+		backgroundColor: '#FCD34D',
 	},
 	image: {
 		width: '100%',

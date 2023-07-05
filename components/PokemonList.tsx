@@ -42,7 +42,10 @@ export default function PokemonList() {
 				<FlatList
 					data={pokemonList}
 					renderItem={({ item }) => (
-						<PokemonListItem pokemonName={item.name} />
+						<PokemonListItem
+							pokemonName={item.name}
+							highlightFavorite={true}
+						/>
 					)}
 					keyExtractor={(item) => item.name}
 					onEndReachedThreshold={0.05}
