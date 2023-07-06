@@ -15,7 +15,7 @@ export default function PokemonMap() {
 	const [isPinDetailsModalVisible, setIsPinDetailsModalVisible] =
 		useState(false);
 
-	function handleLongPress(e: LongPressEvent) {
+	function handleMapLongPress(e: LongPressEvent) {
 		const { coordinate } = e.nativeEvent;
 
 		setIsAddPinModalVisible(true);
@@ -78,7 +78,7 @@ export default function PokemonMap() {
 				pinData={currentPin}
 				onRemovePin={handleRemovePin}
 			/>
-			<MapView style={styles.map} onLongPress={handleLongPress}>
+			<MapView style={styles.map} onLongPress={handleMapLongPress}>
 				{pins.map((pin) => (
 					<Marker
 						key={pin.id}
