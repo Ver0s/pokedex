@@ -4,11 +4,10 @@ import {
 	FlatList,
 	ActivityIndicator,
 	StyleSheet,
-	Button,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useCallback } from 'react';
 import { getData } from '../utils/asyncStorage';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 import PokemonListItem from './PokemonListItem';
 
 export default function FavoritePokemonList() {
@@ -16,21 +15,19 @@ export default function FavoritePokemonList() {
 		[]
 	);
 	const [isLoading, setIsLoading] = useState(true);
-	const isFocused = useIsFocused();
 
-	useEffect(() => {
-		setIsLoading(true);
-		async function getFavoritePokemonNames() {
-			const names: string[] = await getData('FAVORITE_POKEMON');
+	useFocusEffect(
+		useCallback(() => {
+			async function getFavoritePokemonNames() {
+				const names: string[] = await getData('FAVORITE_POKEMON');
 
-			setFavoritePokemonNames(names);
-			setIsLoading(false);
-		}
+				setFavoritePokemonNames(names);
+				setIsLoading(false);
+			}
 
-		if (isFocused) {
 			getFavoritePokemonNames();
-		}
-	}, [isFocused]);
+		}, [])
+	);
 
 	if (isLoading) return <ActivityIndicator size="large" />;
 
