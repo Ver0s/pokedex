@@ -1,4 +1,4 @@
-import { Text, Image, View, StyleSheet, Button } from 'react-native';
+import { Image, View, StyleSheet, Button } from 'react-native';
 import { addToFavorites, removeFromFavorites } from '../utils/asyncStorage';
 import { isPokemonFavorite } from '../utils/asyncStorage';
 import { useEffect, useState } from 'react';
