@@ -21,12 +21,14 @@ export default function PinDetailsModal({
 
 	return (
 		<MapModal isVisible={isVisible} title={title} onClose={onClose}>
-			<Text>Pokemon name: {pinData.name}</Text>
-			<Text>{pinData.notes}</Text>
-			<Text>Coordinates:</Text>
-			<Text>
-				{pinData.coords.latitude}, {pinData.coords.longitude}
-			</Text>
+			<View style={{ marginBottom: 10, gap: 10 }}>
+				<Text>Name: {pinData.name}</Text>
+				<Text>Notes: {pinData.notes}</Text>
+				<Text>Coordinates:</Text>
+				<Text>
+					{pinData.coords.latitude}, {pinData.coords.longitude}
+				</Text>
+			</View>
 			<Button
 				title="Remove pin"
 				color="#dc2626"
